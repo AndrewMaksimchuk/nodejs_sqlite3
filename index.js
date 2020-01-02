@@ -13,13 +13,13 @@ db.getOne("langs", "name='Andrew'")
 const table = "greetings(message, author)";
 const data = "'Hello from world!', 'Dane'";
 db.insertRow(table, data)
-	.then(result => console.log('A row has been inserted!'))
+	.then(() => console.log('A row has been inserted!'))
 	.catch(e => console.error(e));
 
-const newTable = "greetings";
-const newParam = "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, message TEXT, author TEXT";
+// const newTable = "greetings";
+// const newParam = "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, message TEXT, author TEXT";
 // db.createTable(newTable, newParam)
 // 	.then(result => console.log('New table has created!'))
 // 	.catch(e => console.error(e));
 
-db.dbClose().then(response => console.log('Close the database connection!')).catch(e => console.error(e));
+db.dbClose().then(() => console.log('Close the database connection!')).catch(e => console.error(e));
