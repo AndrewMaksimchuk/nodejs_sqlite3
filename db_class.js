@@ -1,8 +1,9 @@
+"use strict";
 const sqlite3 = require("sqlite3").verbose();
 
 /**
  * Class representing a database connection.
- * @param {object} _db - Protected property.
+ * @param {object} _db - Protected property, use inside class.
  */
 class DB {
     /**
@@ -106,6 +107,40 @@ class DB {
                 resolve(true);
             });
         });
+    }
+
+    /**
+     * @method update
+     * @param {string} sql - Raw sql query.
+     * @description Set new value to column.
+     */
+    update(sql) {
+        return new Promise((resolve, reject) => {
+            this._db.run(sql, [], err => {
+                if (err) {
+                    reject(err.message);
+                }
+                resolve(true);
+            })
+        })
+    }
+
+    /**
+     * @method delete
+     * @param {string} tableName - Name of table.
+     * @param {string} params - Options which row should be deleted.
+     * @description Delete row from table.
+     */
+    delete(tableName, params) {
+        return new Promise((resolve, reject) => {
+            const sql = `DELETE FROM ${tableName} WHERE ${params}`;
+            this._db.run(sql, [], err => {
+                if (err) {
+                    reject(err.message);
+                }
+                resolve(true);
+            })
+        })
     }
 }
 
